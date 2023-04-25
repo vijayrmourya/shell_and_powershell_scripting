@@ -1,0 +1,57 @@
+To set up SSH login from your local machine to a remote machine and enable logging to show the full process, you can follow these steps:
+
+1. Open a terminal or command prompt on your local machine.
+
+2. Generate an SSH key pair by typing the following command:
+
+   ```
+   ssh-keygen -t rsa
+   ```
+
+   This will generate a public and private key pair in the `~/.ssh` directory of your local machine.
+
+3. Copy the public key to the remote machine by typing the following command:
+
+   ```
+   ssh-copy-id username@remote_machine
+   ```
+
+   Replace `username` with your username on the remote machine, and `remote_machine` with the hostname or IP address of the remote machine you want to connect to. You will be prompted to enter your password.
+
+   This command will copy your public key to the remote machine and append it to the `~/.ssh/authorized_keys` file, which will allow you to log in to the remote machine without a password.
+
+4. Test the SSH login by typing the following command:
+
+   ```
+   ssh username@remote_machine
+   ```
+
+   If everything is set up correctly, you should be logged in to the remote machine without being prompted for a password.
+
+5. To enable logging to show the full process, edit the SSH configuration file on the remote machine by typing the following command:
+
+   ```
+   sudo nano /etc/ssh/sshd_config
+   ```
+
+   Find the line that starts with `LogLevel` and change the value to `VERBOSE`. If the line is commented out, remove the `#` at the beginning of the line.
+
+   Save the file and exit the editor.
+
+6. Restart the SSH service by typing the following command:
+
+   ```
+   sudo systemctl restart sshd
+   ```
+
+   This will apply the changes to the SSH configuration.
+
+7. Test the logging by typing the following command:
+
+   ```
+   ssh username@remote_machine "ps -aux"
+   ```
+
+   This will log in to the remote machine and execute the `ps -aux` command, which will display the full process list. The output will also be logged in the `/var/log/auth.log` file on the remote machine.
+
+That's it! You have now set up SSH login from your local machine to a remote machine and enabled logging to show the full process.

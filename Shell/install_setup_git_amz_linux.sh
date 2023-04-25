@@ -3,6 +3,10 @@
 # Update package list and install Git
 sudo yum update -y
 sudo yum install -y git
+# # Update package list and install Git Ubuntu
+# sudo apt-get update
+# sudo apt-get install -y git
+
 
 # Configure Git global settings
 echo "What is your name for Git?"
